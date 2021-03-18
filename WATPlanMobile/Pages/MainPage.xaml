@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WATPlanMobile.Pages.MainPage"
+             Title="Nie masz jeszcze planów">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                Text="Trochę tu pusto..."
+                FontSize="Title"
+                HorizontalOptions="CenterAndExpand"/>
+            <Label
+                Text="Wybierz swój pierwszy Plan z listy i zapisz go!"
+                FontSize="Subtitle"
+                HorizontalOptions="CenterAndExpand"/>
+            <Button x:Name="wybierzButton"
+                    Text="Zaczynamy!"
+                    CornerRadius="15"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource D_ButtonColor}, Light={StaticResource L_ButtonColor}}"
+                    TextColor="{AppThemeBinding Dark={StaticResource L_NormalTextColor}, Light={StaticResource D_NormalTextColor}}"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    Padding="30, 15"
+                    Margin="0, 40, 0,0"
+                    Clicked="Button_OnClicked"
+            />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

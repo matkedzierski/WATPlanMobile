@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WATPlanMobile.Main.EventBox"
+             x:Name="this"
+             BackgroundColor="{Binding Color, Source={x:Reference this}}"
+             CornerRadius="5"
+             BorderColor="Black"
+             Padding="0">
+    <StackLayout
+        Padding = "3"
+        VerticalOptions="CenterAndExpand">
+        <Label
+            Text="{Binding Line1, Source={x:Reference this}}"
+            Margin="0"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            MaxLines="3"
+            FontSize="Medium"/>
+        <Label
+            Text="{Binding Line2, Source={x:Reference this}}"
+            Margin="0"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            FontSize="Body"/>
+        <Label
+            Text="{Binding Line3, Source={x:Reference this}}"
+            Margin="0"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            FontSize="Body"/>
+    </StackLayout>
+</Frame>

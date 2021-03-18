@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WATPlanMobile.Main.App">
+    <Application.Resources>
+        
+        <!-- niezależne od motywu -->
+        <Color x:Key="NavigationBarColor">MidnightBlue</Color>
+        <Color x:Key="StatusBarColor">#000044</Color>
+        <Color x:Key="NavigationBarTextColor">White</Color>
+        
+        <!-- Dark theme -->
+        <Color x:Key="D_AppBackgroundColor">#222222</Color>
+        <Color x:Key="D_NormalTextColor">#eeeeee</Color>
+        <Color x:Key="D_ButtonColor">RoyalBlue</Color>
+        
+        <!-- Light theme -->
+        <Color x:Key="L_AppBackgroundColor">#eee</Color>
+        <Color x:Key="L_NormalTextColor">#222222</Color>
+        <Color x:Key="L_ButtonColor">MidnightBlue</Color>
+        
+        
+        <!-- navigation page -->
+        <Style TargetType="{x:Type NavigationPage}">
+            
+            <!-- pasek -->
+            <Setter Property="BarBackgroundColor"
+                    Value="{StaticResource NavigationBarColor}" />
+            
+            
+            <!-- tekst paska -->
+            <Setter Property="BarTextColor" Value="{AppThemeBinding 
+                        Light={StaticResource NavigationBarTextColor}, 
+                        Dark={StaticResource NavigationBarColor}}" />
+            
+            
+            <!-- tło strony -->
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+                        Light={StaticResource L_AppBackgroundColor}, 
+                        Dark={StaticResource D_AppBackgroundColor}}" />
+        </Style>
+
+        
+        
+        <!-- content page -->
+        <Style TargetType="{x:Type ContentPage}"
+               ApplyToDerivedTypes="True">
+            
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource L_AppBackgroundColor}, 
+                        Dark={StaticResource D_AppBackgroundColor}}" />
+        </Style>
+        
+        <Style TargetType="Label">
+            <Setter Property="TextColor" 
+                    Value="{AppThemeBinding
+                        Light={StaticResource L_NormalTextColor}, 
+                        Dark={StaticResource D_NormalTextColor}}" />
+        </Style>
+        
+        
+    </Application.Resources>
+</Application>

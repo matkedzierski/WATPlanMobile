@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:WATPlanMobile.Pages;assembly=WATPlanMobile"
+             xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
+             xmlns:models="clr-namespace:WATPlanMobile.Models;assembly=WATPlanMobile"
+             x:Class="WATPlanMobile.Pages.UnitsPage"
+             x:DataType="pages:UnitsPage"
+             Title = "Wybierz jednostkę">
+    <ContentPage.Content>
+        <ListView
+            x:Name="ListView"
+            ItemsSource="{Binding Units}"
+            HasUnevenRows = "True"
+            SelectionMode="None"
+            IsPullToRefreshEnabled = "True"
+            Refreshing="ListView_OnRefreshing"
+            SeparatorColor = "DimGray"
+            ItemTapped="ListView_OnItemTapped">
+            <ListView.Resources>
+                <ResourceDictionary>
+                    <main:ShortcutConverter x:Key="Shortcut" />
+                </ResourceDictionary>
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:UnitModel">
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Padding="10,5" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                <ContentView WidthRequest="50" MinimumWidthRequest="50">
+                                    <Label Text="{Binding ID}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+                                </ContentView>
+                                <StackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" FontSize="Medium"/>
+                                    <Label Text="{Binding Count, StringFormat='{0} planów'}" FontSize="Medium"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
