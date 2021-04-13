@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
              x:Class="WATPlanMobile.Pages.SettingsPage"
              Title="Ustawienia">
     <ContentPage.Content>
@@ -12,12 +13,15 @@
                 <TableSection Title="Plany" TextColor="{AppThemeBinding 
                         Light={StaticResource L_NormalTextColor}, 
                         Dark={StaticResource D_NormalTextColor}}">
-                    <SwitchCell Text="Ukryj wykłady" x:Name="ukr_wyklady" OnChanged="Change" OnColor="{AppThemeBinding 
-                        Light={StaticResource L_NormalTextColor}, 
-                        Dark={StaticResource D_NormalTextColor}}"/>
-                    <SwitchCell Text="Ukryj weekendy" x:Name="ukr_weekendy"  OnChanged="Change" OnColor="{AppThemeBinding 
-                        Light={StaticResource L_NormalTextColor}, 
-                        Dark={StaticResource D_NormalTextColor}}" />
+                    
+                    <main:WPSwitchCell 
+                            Text="Ukryj wykłady" 
+                            x:Name="ukr_wyklady" 
+                            OnChanged="Change"/>
+                    <main:WPSwitchCell 
+                            Text="Ukryj weekendy" 
+                            x:Name="ukr_weekendy"  
+                            OnChanged="Change" />
                 </TableSection>
             </TableRoot>
         </TableView>
