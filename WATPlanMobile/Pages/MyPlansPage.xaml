@@ -9,16 +9,17 @@
              x:DataType="pages:MyPlansPage"
              Title="Zapisane plany">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Dodaj" Clicked="MenuItem_OnClicked" Order="Secondary"/>
+        <ToolbarItem Text="Dodaj" Clicked="MenuItem_OnClicked" Order="Secondary" />
+        <ToolbarItem Text="Ustawienia" Clicked="MenuItem_OnClicked" Order="Secondary" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView
             x:Name="ListView"
             ItemsSource="{Binding Plans}"
-            HasUnevenRows = "True"
+            HasUnevenRows="True"
             SelectionMode="None"
             ItemTapped="ListView_OnItemTapped"
-            SeparatorColor = "DimGray">
+            SeparatorColor="DimGray">
             <ListView.Resources>
                 <ResourceDictionary>
                     <main:ShortcutConverter x:Key="Shortcut" />
@@ -30,11 +31,13 @@
                         <ViewCell.View>
                             <StackLayout Padding="10,5" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                                 <ContentView WidthRequest="50" MinimumWidthRequest="50">
-                                    <Label Text="{Binding Type, Converter={StaticResource Shortcut}}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Type, Converter={StaticResource Shortcut}}"
+                                           VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                           FontSize="Large" FontAttributes="Bold" />
                                 </ContentView>
                                 <StackLayout VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" FontSize="Medium"/>
-                                    <Label Text="{Binding Type}" FontSize="Medium"/>
+                                    <Label Text="{Binding Name}" FontSize="Medium" />
+                                    <Label Text="{Binding Type}" FontSize="Medium" />
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell.View>

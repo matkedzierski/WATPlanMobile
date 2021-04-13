@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 using WATPlanMobile.Models;
 
 namespace WATPlanMobile.Controllers
@@ -18,7 +19,7 @@ namespace WATPlanMobile.Controllers
         public Task<List<PlanModel>> GetPlansAsync()
         {
             //Get all notes.
-            return database.Table<PlanModel>().ToListAsync();
+            return database.GetAllWithChildrenAsync<PlanModel>();
         }
 
         public Task<PlanModel> GetPlanAsync(string id)
@@ -29,9 +30,9 @@ namespace WATPlanMobile.Controllers
                 .FirstOrDefaultAsync();
         }
 
-        public Task<int> SavePlanAsync(PlanModel plan)
+        public Task SavePlanAsync(PlanModel plan)
         {
-            return database.InsertOrReplaceAsync(plan);
+            return database.InsertWithChildrenAsync(plan);
         }
 
         public Task<int> DeletePlanAsync(PlanModel plan)

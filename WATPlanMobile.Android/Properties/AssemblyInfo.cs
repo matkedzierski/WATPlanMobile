@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Android;
 using Android.App;
 
 // General Information about an assembly is controlled through the following 
@@ -9,14 +9,14 @@ using Android.App;
 [assembly: AssemblyTitle("WATPlanMobile.Android")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CompanyName")]
+[assembly: AssemblyCompany("Mateusz Kędzierski")]
 [assembly: AssemblyProduct("WATPlanMobile.Android")]
-[assembly: AssemblyCopyright("Copyright © CompanyName Year")]
-[assembly: AssemblyTrademark("CompanyTrademark")]
+[assembly: AssemblyCopyright("Copyright © WATPlan 2021")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: UsesPermission(Android.Manifest.Permission.AccessNetworkState)]
-[assembly: Application(UsesCleartextTraffic=true)]
+[assembly: UsesPermission(Manifest.Permission.AccessNetworkState)]
+[assembly: Application(UsesCleartextTraffic = true)]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -28,5 +28,5 @@ using Android.App;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]

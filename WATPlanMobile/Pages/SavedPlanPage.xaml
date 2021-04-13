@@ -1,26 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
+
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:WATPlanMobile.Models;assembly=WATPlanMobile"
+    xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
     x:Class="WATPlanMobile.Pages.SavedPlanPage"
     x:DataType="models:PlanModel"
     Title="{Binding Name}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Usuń plan" Order="Secondary" Clicked="Usun" />
-        <ToolbarItem Text="Ukryj weekendy" Order="Secondary" Clicked="Weekendy" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <RefreshView Refreshing="RefreshView_OnRefreshing" x:Name="RefreshView">
-            <StackLayout>
-                <Label Text="{Binding Name, StringFormat='Tu będzie wyświetlony zapisany plan: {0}'}"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"
-                       FontSize="Title"/>
-                <Label Text="{Binding Events.Count, StringFormat='Liczba wydarzeń: {0}'}"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"/>
+        <StackLayout Orientation="Horizontal" Spacing="0">
+                <main:PlanDayHeader >
+                    <ActivityIndicator Grid.Row="0" Grid.Column="0" x:Name="Indicator" Color="MediumBlue"/>
+                </main:PlanDayHeader>
+                <CarouselView x:Name="carousel" ItemsSource="{Binding Weeks}" Loop="False" >
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="models:WeekModel">
+                            <main:PlanGridHeader Week="{Binding .}" x:Name="Header" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
             </StackLayout>
-        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

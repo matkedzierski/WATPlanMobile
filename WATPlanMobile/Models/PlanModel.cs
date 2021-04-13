@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using SQLite;
-using WATPlanMobile.Annotations;
+using SQLiteNetExtensions.Attributes;
 using WATPlanMobile.Controllers;
+using Xamarin.Forms;
 
 namespace WATPlanMobile.Models
 {
@@ -19,77 +18,91 @@ namespace WATPlanMobile.Models
     [Serializable]
     public class PlanModel : INotifyPropertyChanged
     {
-        [PrimaryKey]
-        [DataMember]
+        [PrimaryKey] [DataMember]
         public string ID { get; set; }
-        [DataMember]
+
+        [DataMember] 
         public string Name { get; set; }
-        [DataMember]
+
+        [DataMember] 
         public string Type { get; set; }
 
-        [Ignore]
-        public ObservableCollection<EventModel> Events
-        {
-            get => EventsBlobbed ==null ? new ObservableCollection<EventModel>() : JsonConvert.DeserializeObject<ObservableCollection<EventModel>>(EventsBlobbed);
-            set => EventsBlobbed = JsonConvert.SerializeObject(value);
-        }
-        [DataMember]
-        public string EventsBlobbed { get; set; }
+        [TextBlob("weeksBlobbed")] 
+        public ObservableCollection<WeekModel> Weeks { get; set; }
 
-        public async Task Load()
+        public string weeksBlobbed { get; set; }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        public async Task<ObservableCollection<EventModel>> LoadFromAPI()
         {
-            Debug.WriteLine("Ładuje...", "dupa");
-            Events = await APIClient.GetEventsForPlan(ID);
-            Debug.WriteLine(Events.Count + " już", "dupa");
-            OnPropertyChanged(nameof(Events));
+            var events = await APIClient.GetEventsForPlan(ID);
+            return events;
+            //DependencyService.Get<Toast>().Show("Nie udało się wczytać planu!");
+            
+        }
+
+        public void SetEvents(ObservableCollection<EventModel> events)
+        {
+            if (Weeks == null) Weeks = new ObservableCollection<WeekModel>();
+            else Weeks.Clear();
+            for (var i = 0; i < 50; i++)
+            {
+                var i1 = i;
+                var wm = new WeekModel
+                {
+                    Offset = i, Events = new ObservableCollection<EventModel>(events.Where(e => e.Week == i1)),
+                    Dates = GetDates(i1)
+                };
+                Weeks.Add(wm);
+            }
+
+            OnPropertyChanged(nameof(Weeks));
         }
         
+        private string[] GetDates(int off)
+        {
+            var Dates = new string[7];
+            // wyznacz ostatni pierwszy października
+            var currDate = DateTime.Now.Date;
+            var startSemestru = new DateTime(currDate.Year, 10, 1);
+            if (currDate.Month < 10) startSemestru = startSemestru.AddYears(-1);
+
+            // wyznacz pierwszy poniedziałek <= 1.10
+            var dow = (int) startSemestru.DayOfWeek;
+            if (dow == 0) dow = 7; // 0 to niedziela -> 7
+            var odPoniedzialku = dow - 1; // ile dni od poniedzialku
+            var zerowyPoniedzialek =
+                startSemestru.AddDays(-1 * odPoniedzialku); // wyznacz datę pierwszego poniedziałku przed 1.10
+            var iter = zerowyPoniedzialek.AddDays(7 * off);
+
+            for (var i = 0; i < 7; i++)
+            {
+                Dates[i] = iter.ToString("dd.MM");
+                iter = iter.AddDays(1);
+            }
+
+            return Dates;
+        }
+
         public override string ToString()
         {
-            return $"> Plan: \n" + 
+            return "> Plan:      \n" +
                    $"\tName:      {Name} \n" +
                    $"\tID:        {ID} \n" +
                    $"\tType:      {Type} \n" +
-                   $"\tEvents:    {Events.Count} \n";
+                   $"\tWeeks:     {Weeks.Count} \n";
         }
 
         public IEnumerable<EventModel> GetWeekEvents(int WeekOffset)
         {
-            var cest = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
-            //wyznacz ktory tydzien
-            var now = TimeZoneInfo.Local.Equals(cest) ? DateTime.Now : TimeZoneInfo.ConvertTime(DateTime.Now, cest);
-            var currentWeek = GetWeekNumber(now);
-            var week = currentWeek + WeekOffset;
-            //zbierz wydarzenia z tego tygodnia
-            return Events.Where(e => e.Week == week).ToList().OrderByDescending(model => model.Week*7 + model.DayOfWeek);
+            var week = Weeks.Single(w => w.Offset == WeekOffset);
+            return week.Events;
         }
 
-        public static int GetWeekNumber(DateTime start)
-        {
-            while (true)
-            {
-                var startOfYear = start.AddDays(-start.Day + 1).AddMonths(-start.Month + 1);
-                var endOfYear = startOfYear.AddYears(1).AddDays(-1);
-                int[] iso8601Correction = {6, 7, 8, 9, 10, 4, 5};
-                var nds = start.Subtract(startOfYear).Days + iso8601Correction[(int) startOfYear.DayOfWeek];
-                var wk = nds / 7;
-                switch (wk)
-                {
-                    case 0:
-                        start = startOfYear.AddDays(-1);
-                        continue;
-                    case 53:
-                        return endOfYear.DayOfWeek < DayOfWeek.Thursday ? 1 : wk;
-                    default:
-                        return wk;
-                }
-                
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
+       
+        
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

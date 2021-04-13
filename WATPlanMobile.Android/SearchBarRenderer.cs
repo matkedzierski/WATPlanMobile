@@ -3,16 +3,15 @@ using Android.Widget;
 using WATPlanMobile.Android;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Color = Xamarin.Forms.Color;
 
 [assembly: ExportRenderer(typeof(SearchBar), typeof(WPSearchBarRenderer))]
+
 namespace WATPlanMobile.Android
 {
     public class WPSearchBarRenderer : SearchBarRenderer
     {
         public WPSearchBarRenderer(Context context) : base(context)
         {
-            
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<SearchBar> e)

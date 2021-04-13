@@ -1,34 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WATPlanMobile.Main.EventBox"
-             x:Name="this"
-             BackgroundColor="{Binding Color, Source={x:Reference this}}"
-             CornerRadius="5"
-             BorderColor="Black"
-             Padding="0">
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
+       x:Class="WATPlanMobile.Main.EventBox"
+       x:DataType="main:EventBox"
+       BackgroundColor="{Binding Color}"
+       CornerRadius="5"
+       BorderColor="Black"
+       Padding="0">
+    <Frame.Resources>
+        <main:ShortcutConverter x:Key="sc" />
+    </Frame.Resources>
     <StackLayout
-        Padding = "3"
+        Padding="3"
         VerticalOptions="CenterAndExpand">
         <Label
-            Text="{Binding Line1, Source={x:Reference this}}"
+            Text="{Binding Line1, Converter={StaticResource sc}}"
+            TextColor="Black"
             Margin="0"
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center"
             MaxLines="3"
-            FontSize="Medium"/>
+            FontSize="Medium" />
         <Label
-            Text="{Binding Line2, Source={x:Reference this}}"
+            Text="{Binding Line2, Converter={StaticResource sc}, StringFormat='({0})'}"
+            TextColor="Black"
             Margin="0"
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center"
-            FontSize="Body"/>
+            FontSize="Body" />
         <Label
-            Text="{Binding Line3, Source={x:Reference this}}"
+            Text="{Binding Line3, StringFormat='[{0}]'}"
+            TextColor="Black"
             Margin="0"
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center"
-            FontSize="Body"/>
+            FontSize="Body" />
     </StackLayout>
 </Frame>

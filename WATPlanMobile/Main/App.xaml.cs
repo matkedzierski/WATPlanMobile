@@ -12,20 +12,20 @@ namespace WATPlanMobile.Main
 {
     public partial class App
     {
+        public static PlanyDB database;
+
         public App()
         {
             Debug.WriteLine("Uruchomiono aplikację!", "dupa");
             InitializeComponent();
-            Device.SetFlags(new[] {
-                "CarouselView_Experimental",
+            Device.SetFlags(new[]
+            {
+                "CarouselView_Experimental"
             });
             var list = DB.GetPlansAsync().Result;
             MainPage = list.Count > 0 ? new NavigationPage(new MyPlansPage()) : new NavigationPage(new MainPage());
         }
 
-
-        public static PlanyDB database;
-        
         public static PlanyDB DB =>
             database ?? (database =
                 new PlanyDB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

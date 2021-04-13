@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
+      x:Class="WATPlanMobile.Main.PlanDayHeader"
+      RowDefinitions="40, *, *, *, *, *, *, *" ColumnDefinitions="Auto" ColumnSpacing="0" RowSpacing="0"
+      Margin="0">
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True" x:Key="hl1">
+                <Setter Property="TextColor"
+                        Value="LightGray" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="End" />
+                <Setter Property="Margin"
+                        Value="7, 0" />
+            </Style>
+            <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True" x:Key="hl2">
+                <Setter Property="TextColor"
+                        Value="LightGray" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Start" />
+                <Setter Property="Margin"
+                        Value="5, 0" />
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+    <Grid.Children>
+        
+        <main:HeaderBox Grid.Row="1" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="2" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="3" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="4" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="5" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="6" Grid.Column="0" Padding="5, 0" />
+        <main:HeaderBox Grid.Row="7" Grid.Column="0" Padding="5, 0" />
+        <StackLayout Grid.Row="1" Grid.Column="0">
+            <Label Text="08:00" Style="{StaticResource hl1}" />
+            <Label Text="09:35" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="2" Grid.Column="0">
+            <Label Text="09:50" Style="{StaticResource hl1}" />
+            <Label Text="11:25" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="3" Grid.Column="0">
+            <Label Text="11:40" Style="{StaticResource hl1}" />
+            <Label Text="13:15" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="4" Grid.Column="0">
+            <Label Text="13:30" Style="{StaticResource hl1}" />
+            <Label Text="15:05" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="5" Grid.Column="0">
+            <Label Text="15:45" Style="{StaticResource hl1}" />
+            <Label Text="17:20" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="6" Grid.Column="0">
+            <Label Text="17:35" Style="{StaticResource hl1}" />
+            <Label Text="19:10" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="7" Grid.Column="0">
+            <Label Text="19:25" Style="{StaticResource hl1}" />
+            <Label Text="21:00" Style="{StaticResource hl2}" />
+        </StackLayout>
+    </Grid.Children>
+</Grid>

@@ -8,7 +8,12 @@ namespace WATPlanMobile.Main
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var s = (string)value; return s.Substring(0, 1);
+            var ret = "";
+            foreach (var str in ((string) value).Split(' '))
+                if (str.Length > 1 && str[0] != '(')
+                    ret += str.ToUpper()[0];
+
+            return ret;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

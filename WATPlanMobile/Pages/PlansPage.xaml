@@ -1,23 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
              xmlns:models="clr-namespace:WATPlanMobile.Models;assembly=WATPlanMobile"
              x:Class="WATPlanMobile.Pages.PlansPage"
              x:DataType="models:UnitModel"
-             Title = "{Binding Name}">
+             Title="{Binding Name}">
     <ContentPage.Content>
         <StackLayout>
-            <main:WPSearchBar TextChanged="Filtruj" />
+            <main:WPSearchBar TextChanged="Filtruj" x:Name="bar" IsEnabled="False"/>
             <ListView
                 x:Name="ListView"
                 ItemsSource="{Binding Plans}"
-                HasUnevenRows = "True"
+                HasUnevenRows="True"
                 SelectionMode="None"
-                IsPullToRefreshEnabled = "True"
+                IsPullToRefreshEnabled="True"
                 Refreshing="ListView_OnRefreshing"
                 ItemTapped="ListView_OnItemTapped"
-                SeparatorColor = "DimGray">
+                SeparatorColor="DimGray">
                 <ListView.Resources>
                     <ResourceDictionary>
                         <main:ShortcutConverter x:Key="Shortcut" />
@@ -29,11 +30,13 @@
                             <ViewCell.View>
                                 <StackLayout Padding="10,5" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                                     <ContentView WidthRequest="50" MinimumWidthRequest="50">
-                                        <Label Text="{Binding Type, Converter={StaticResource Shortcut}}" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Type, Converter={StaticResource Shortcut}}"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                               FontSize="Large" FontAttributes="Bold" />
                                     </ContentView>
                                     <StackLayout VerticalOptions="Center">
-                                        <Label Text="{Binding Name}" FontSize="Medium"/>
-                                        <Label Text="{Binding Type}" FontSize="Medium"/>
+                                        <Label Text="{Binding Name}" FontSize="Medium" />
+                                        <Label Text="{Binding Type}" FontSize="Medium" />
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell.View>

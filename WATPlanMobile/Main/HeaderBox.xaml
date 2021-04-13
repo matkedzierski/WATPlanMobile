@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Frame
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
+    x:Class="WATPlanMobile.Main.HeaderBox"
+    x:DataType="main:HeaderBox"
+    BackgroundColor="DimGray"
+    CornerRadius="5"
+    BorderColor="Black">
+</Frame>

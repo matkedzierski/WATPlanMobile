@@ -9,17 +9,18 @@ namespace WATPlanMobile.Pages
 {
     public partial class UnitsPage
     {
-        public ObservableCollection<UnitModel> Units{ get; set; }
         public UnitsPage()
         {
             InitializeComponent();
             ListView.SendRefreshing();
         }
 
+        public ObservableCollection<UnitModel> Units { get; set; }
+
         private async void ListView_OnRefreshing(object sender, EventArgs e)
         {
             Units = await Task.Run(APIClient.GetAllUnits);
-            Device.BeginInvokeOnMainThread( ()=>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 ((ListView) sender).ItemsSource = Units;
                 ((ListView) sender).IsRefreshing = false;
@@ -28,7 +29,7 @@ namespace WATPlanMobile.Pages
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new PlansPage((UnitModel)e.Item));
+            await Navigation.PushAsync(new PlansPage((UnitModel) e.Item));
         }
     }
 }

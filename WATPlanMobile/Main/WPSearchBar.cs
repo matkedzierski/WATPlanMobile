@@ -4,6 +4,5 @@ namespace WATPlanMobile.Main
 {
     public class WPSearchBar : SearchBar
     {
-        
     }
 }

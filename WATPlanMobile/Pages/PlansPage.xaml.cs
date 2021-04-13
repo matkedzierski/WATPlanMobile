@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WATPlanMobile.Controllers;
 using WATPlanMobile.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,9 +12,6 @@ namespace WATPlanMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlansPage
     {
-        public UnitModel Wydzial { get; set; }
-        public ObservableCollection<PlanModel> Wszystkie { get; set; }
-        
         public PlansPage(UnitModel wydzial)
         {
             Wydzial = wydzial;
@@ -25,6 +19,9 @@ namespace WATPlanMobile.Pages
             InitializeComponent();
             ListView.SendRefreshing();
         }
+
+        public UnitModel Wydzial { get; set; }
+        public ObservableCollection<PlanModel> Wszystkie { get; set; }
 
         private async void ListView_OnRefreshing(object sender, EventArgs e)
         {
@@ -35,14 +32,17 @@ namespace WATPlanMobile.Pages
                 ((ListView) sender).IsRefreshing = false;
                 return;
             }
+
             Wydzial.Plans = Wszystkie;
             Device.BeginInvokeOnMainThread(() =>
             {
                 ((ListView) sender).ItemsSource = Wydzial.Plans;
                 ((ListView) sender).IsRefreshing = false;
             });
+
+            bar.IsEnabled = true;
         }
-        
+
         private void Filtruj(object sender, TextChangedEventArgs e)
         {
             ListView.ItemsSource = Wydzial.Plans.Where(w => w.Name.ToLower().Contains(e.NewTextValue.ToLower()));
@@ -50,7 +50,7 @@ namespace WATPlanMobile.Pages
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new PlanPage((PlanModel)e.Item));
+            await Navigation.PushAsync(new PlanPage((PlanModel) e.Item));
         }
     }
 }

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:main="clr-namespace:WATPlanMobile.Main;assembly=WATPlanMobile"
+      xmlns:models="clr-namespace:WATPlanMobile.Models;assembly=WATPlanMobile"
+      x:Class="WATPlanMobile.Main.PlanGridHeader"
+      x:DataType="models:WeekModel"
+      RowDefinitions="40, *, *, *, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *, *" ColumnSpacing="0" RowSpacing="0">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True" x:Key="hl1">
+                <Setter Property="TextColor"
+                        Value="LightGray" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="End" />
+            </Style>
+            <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True" x:Key="hl2">
+                <Setter Property="TextColor"
+                        Value="LightGray" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Start" />
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+    <Grid.Children>
+        <main:HeaderBox Grid.Row="0" Grid.Column="0" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="1" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="2" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="3" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="4" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="5" />
+        <main:HeaderBox Grid.Row="0" Grid.Column="6" />
+        <StackLayout Grid.Row="0" Grid.Column="0">
+            <Label Text="Pn" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[0]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="1">
+            <Label Text="Wt" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[1]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="2">
+            <Label Text="Śr" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[2]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="3">
+            <Label Text="Cz" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[3]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="4">
+            <Label Text="Pt" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[4]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="5">
+            <Label Text="So" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[5]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="6">
+            <Label Text="Nd" Style="{StaticResource hl1}" />
+            <Label Text="{Binding Dates[6]}" Style="{StaticResource hl2}" />
+        </StackLayout>
+    </Grid.Children>
+</Grid>

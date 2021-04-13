@@ -1,15 +1,17 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Graphics;
 using Android.OS;
+using AndroidX.AppCompat.App;
 using WATPlanMobile.Main;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Platform = Xamarin.Essentials.Platform;
 
 namespace WATPlanMobile.Android
 {
-    [Activity(Label = "WATPlanMobile", Theme = "@style/MainTheme", MainLauncher = true,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "WATPlan", Icon = "@mipmap/icon", Theme = "@style/AppTheme", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode)]
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -17,11 +19,15 @@ namespace WATPlanMobile.Android
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-            var statuBarColor = Xamarin.Forms.Application.Current.Resources["StatusBarColor"] is Xamarin.Forms.Color ? (Xamarin.Forms.Color) Xamarin.Forms.Application.Current.Resources["StatusBarColor"] : default;
+            var statuBarColor = Xamarin.Forms.Application.Current.Resources["StatusBarColor"] is Color
+                ? (Color) Xamarin.Forms.Application.Current.Resources["StatusBarColor"]
+                : default;
             Window?.SetStatusBarColor(statuBarColor.ToAndroid());
         }
+        
+        
     }
 }

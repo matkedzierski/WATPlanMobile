@@ -11,12 +11,13 @@ namespace WATPlanMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyPlansPage
     {
-        public ObservableCollection<PlanModel> Plans { get; set; }
         public MyPlansPage()
         {
             GetSavedPlans();
             InitializeComponent();
         }
+
+        public ObservableCollection<PlanModel> Plans { get; set; }
 
         protected override void OnAppearing()
         {
@@ -26,20 +27,17 @@ namespace WATPlanMobile.Pages
         private async void GetSavedPlans()
         {
             var list = await App.DB.GetPlansAsync();
-            foreach (var p in list)
-            {
-                Debug.WriteLine(p);
-            }
             Plans = new ObservableCollection<PlanModel>(list);
             ListView.ItemsSource = Plans;
             if (Plans.Count != 0) return;
             Navigation.InsertPageBefore(new MainPage(), Navigation.NavigationStack[0]);
             await Navigation.PopToRootAsync(true);
         }
-        
+
         private async void MenuItem_OnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UnitsPage());
+            if(((ToolbarItem) sender).Text=="Dodaj") await Navigation.PushAsync(new UnitsPage());
+            if(((ToolbarItem) sender).Text=="Ustawienia") await Navigation.PushAsync(new SettingsPage());
         }
 
         private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
