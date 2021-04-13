@@ -59,20 +59,30 @@ namespace WATPlanMobile.Main
 
             foreach (var e in pg.Week.Events)
             {
-                var col = Color.Black;
                 if (week && e.DayOfWeek == day && block >= e.BlockNumber && block <= e.BlockNumber + e.BlockSpan - 1)
                 {
-                    col = Color.Red;
+                    pg.Children.Add(new Frame{
+                        BackgroundColor = Color.Red,
+                        Padding = new Thickness(1.5),
+                        Content = new EventBox
+                        {
+                            Event = e, Line1 = e.Name, Line2 = e.Type, Line3 = e.Number,
+                            Color = Color.FromHex(e.Color),
+                            BorderColor = Color.Transparent
+                        }}, e.DayOfWeek - 1, e.DayOfWeek, e.BlockNumber, e.BlockNumber + e.BlockSpan);
+                    
                     podswietlone = true;
                 }
-                    
-                pg.Children.Add(
-                    new EventBox
-                    {
-                        Event = e, Line1 = e.Name, Line2 = e.Type, Line3 = e.Number,
-                        Color = Color.FromHex(e.Color),
-                        BorderColor = col
-                    }, e.DayOfWeek - 1, e.DayOfWeek, e.BlockNumber, e.BlockNumber + e.BlockSpan);
+                else
+                {
+                    pg.Children.Add(
+                        new EventBox
+                        {
+                            Event = e, Line1 = e.Name, Line2 = e.Type, Line3 = e.Number,
+                            Color = Color.FromHex(e.Color),
+                            BorderColor = Color.Black
+                        }, e.DayOfWeek - 1, e.DayOfWeek, e.BlockNumber, e.BlockNumber + e.BlockSpan);
+                }
             }
 
             if(!podswietlone && week)
